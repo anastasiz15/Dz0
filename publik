@@ -1,0 +1,74 @@
+задача 1
+import java.util.Optional;
+
+public class Student {
+  private String name;
+  private Optional<Address> address;
+
+  public Student(String name, Address address) {
+    this.name = name;
+    this.address = Optional.ofNullable(address);
+  }
+
+  public Student(String name) {
+    this.name = name;
+    this.address = Optional.empty();
+  }
+
+  public String getName() {
+    return name;
+  }
+
+  public Optional<Address> getAddress() {
+    return address;
+  }
+}
+
+public class Address {
+  private String city;
+  private String region;
+
+  public Address(String city, String region) {
+    this.city = city;
+    this.region = region;
+  }
+
+  public String getCity() {
+    return city;
+  }
+
+  public String getRegion() {
+    return region;
+  }
+}
+
+public class Main {
+  public static void printStudentInfo(Student student) {
+    System.out.print("Student: " + student.getName());
+    student.getAddress().ifPresent(address -> System.out.print(", Address: " + address.getCity() + ", " + address.getRegion()));
+    System.out.println();
+  }
+
+  public static void main(String[] args) {
+    Student student1 = new Student("John Doe", new Address("New York", "NY"));
+    Student student2 = new Student("Jane Smith");
+    Student student3 = new Student("Bob Johnson", new Address("Los Angeles", "CA"));
+
+    printStudentInfo(student1);
+    printStudentInfo(student2);
+    printStudentInfo(student3);
+  }
+}
+Задача 2
+import java.util.Arrays;
+
+public class Main {
+  public static void main(String[] args) {
+    String[] words = {"Hello", "world", "from", "Java", "Stream", "API"};
+
+    String sentence = Arrays.stream(words).reduce((word1, word2) -> word1 + " " + word2).orElse("");
+
+    System.out.println("Words: " + Arrays.toString(words));
+    System.out.println("Sentence: " + sentence);
+  }
+}
